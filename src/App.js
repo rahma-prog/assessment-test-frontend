@@ -1,11 +1,12 @@
-import LoginPage from "./components/loginPage";
+import Router from "./routes";
+import StoreProvider from "./store/storeProvider";
 
 function App() {
   return (
-    <div>
-      < LoginPage />
-    </div>
-  )
+    <StoreProvider>
+      <Router />
+    </StoreProvider>
+  );
 }
 
 export default App;
