@@ -11,12 +11,11 @@ export default function LoginPage() {
         <div className="p-4 flex-col jusitfy-around ml-12 mr-14 pt-20 pb-20  ">
           <form>
             <h1 className="text-2xl font-bold  ">
-              {" "}
-              Welcome to Assessment Test,{" "}
+              Welcome to Assessment Test,
             </h1>
             <h1 className="text-2xl font-bold  mb-8  ">Sign in to continue </h1>
             <h2 className="text-1xl font-bold  mb-6">
-              Don't have an account ?{" "}
+              Don't have an account ?
               <a href="https://example.com" className="underline">
                 Create an account
               </a>
