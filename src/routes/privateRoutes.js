@@ -1,8 +1,7 @@
-import { createBrowserRouter } from "react-router-dom";
 import RouterRedirect from "../components/utilities/routerRedirect";
 import HomePage from "../pages/homePage";
 
-const privateRoutes = createBrowserRouter([
+const privateRoutes = [
   {
     path: "/",
     element: <HomePage />,
@@ -11,6 +10,6 @@ const privateRoutes = createBrowserRouter([
     path: "*",
     element: <RouterRedirect to="/" />,
   },
-]);
+];
 
 export default privateRoutes;

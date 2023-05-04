@@ -5,7 +5,7 @@ function RouterRedirect({ to, message }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => navigate(to), 1000);
+    navigate(to);
   }, [navigate, to]);
 
   return (

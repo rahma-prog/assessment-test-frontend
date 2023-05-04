@@ -1,4 +1,4 @@
-import { useEffect, useReducer } from "react";
+import { useEffect, useReducer, useState } from "react";
 import authService from "../services/authService";
 import networkService from "../services/networkService";
 import { loginAction } from "./storeActions";
@@ -6,6 +6,7 @@ import storeContext from "./storeContext";
 import storeReducer, { storeInitialState } from "./storeReducer";
 
 function StoreProvider({ children }) {
+  const [isLoading, setIsLoading] = useState(true);
   const [state, dispatch] = useReducer(storeReducer, storeInitialState);
 
   const values = {
@@ -18,14 +19,24 @@ function StoreProvider({ children }) {
 
   useEffect(() => {
     if (networkService.isAuthenticated()) {
-      authService.getAuthUser().then((user) => {
-        dispatch(loginAction(user));
-      });
+      setIsLoading(true);
+      authService
+        .getAuthUser()
+        .then((user) => {
+          dispatch(loginAction(user));
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    } else {
+      setIsLoading(false);
     }
   }, []);
 
   return (
-    <storeContext.Provider value={values}>{children}</storeContext.Provider>
+    <storeContext.Provider value={values}>
+      {isLoading ? null : children}
+    </storeContext.Provider>
   );
 }
 
