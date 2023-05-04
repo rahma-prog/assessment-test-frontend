@@ -19,9 +19,9 @@ export default function LoginPage() {
 
   return (
     <div className="w-full h-screen flex ">
-      <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[1000px] bg-slate-50">
+      <div className="grid grid-cols-1 md:grid-cols-2 m-auto h-[550px] shadow-lg shadow-gray-600 sm:max-w-[1000px] bg-slate-50 rounded-xl">
         <div className="w-full h-[550px] ">
-          <img className="w-full h-full" src={login} alt="/"></img>
+          <img className="w-full h-full rounded-xl" src={login} alt="/"></img>
         </div>
         <div className="p-4 flex-col jusitfy-around ml-12 mr-14 pt-20 pb-20  ">
           <form>

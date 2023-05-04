@@ -61,9 +61,9 @@ const UsersPage = () => {
               {user.name} - {user.email}
             </div>
             <div>
-              <button onClick={() => handleDeleteUser(index)} className="mr-2">Delete
+              <button onClick={() => handleDeleteUser(index)} className="mr-2">
               </button>
-              <button onClick={() => console.log('Modify user:', user)}>Update
+              <button onClick={() => console.log('Modify user:', user)}>
               </button>
             </div>
           </li>
