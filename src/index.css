@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base{
+    * {
+        @apply font-[Kanit]
+    }
+    h1 {
+        @apply text-3xl font-bold
+    }
+
+    li{
+        @apply px-4 
+    }
+}
