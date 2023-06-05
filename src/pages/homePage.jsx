@@ -1,76 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import controlImage from "../assets/images/control.png";
+import ChartFillImage from "../assets/images/Chart_fill.png";
+import UserImage from "../assets/images/User.png";
+import SearchImage from "../assets/images/Search.png";
+import SettingImage from "../assets/images/Setting.png";
+import ChatImage from "../assets/images/Chat.png";
+import { Link, Outlet } from "react-router-dom";
 
-const UsersPage = () => {
-  const [users, setUsers] = useState([]);
-  const [newUser, setNewUser] = useState({
-    name: '',
-    email: ''
-  });
+const HomePage = () => {
+	const [open, setOpen] = useState(true);
+	const Menus = [
+		{ title: "Dashboard", src: ChartFillImage },
+		{ title: "Inbox", src: ChatImage },
+		{ title: "Users", src: UserImage, gap: true, to: "/users" },
+		{ title: "Search", src: SearchImage },
+		{ title: "Setting", src: SettingImage },
+	];
 
-  const handleInputChange = (e) => {
-    setNewUser({ ...newUser, [e.target.name]: e.target.value });
-  };
+	return (
+		<div className="flex bg-gray-100">
+			<div
+				className={` ${
+					open ? "w-72" : "w-20 "
+				} bg-slate-500 h-screen p-5  pt-8 relative duration-300 rounded-lg`}
+			>
+				<img
+					src={controlImage}
+					alt=""
+					className={`absolute cursor-pointer -right-3 top-9 w-7 border-gray-100
+           border-2 rounded-full  ${!open && "rotate-180"}`}
+					onClick={() => setOpen(!open)}
+				/>
 
-  const handleAddUser = () => {
-    setUsers([...users, newUser]);
-    setNewUser({ name: '', email: '' });
-  };
+				<ul className="pt-6">
+					{Menus.map((Menu, index) => (
+						<li
+							key={index}
+							className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-white text-sm items-center gap-x-4 
+              ${Menu.gap ? "mt-9" : "mt-2"} ${index === 0 &&
+								"bg-light-white"} `}
+						>
+							<Link to={Menu.to} className="flex items-center ">
+								<img src={Menu.src} alt={Menu.title} className="mr-2" />
 
-  const handleDeleteUser = (index) => {
-    const updatedUsers = [...users];
-    updatedUsers.splice(index, 1);
-    setUsers(updatedUsers);
-  };
-
-  return (
-    <div>
-      
-
-      <div className="mb-4">
-        <h3>Add User</h3>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={newUser.name}
-          onChange={handleInputChange}
-          className="mr-2 px-2 py-1 border border-gray-300 rounded-md"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={newUser.email}
-          onChange={handleInputChange}
-          className="mr-2 px-2 py-1 border border-gray-300 rounded-md"
-        />
-        <button
-          onClick={handleAddUser}
-          className="px-4 py-2 text-white rounded-md bg-stone-950"
-        >
-          Add user
-        </button>
-      </div>
-
-      <h2>Team members </h2>
-      <ul className="border border-gray-300">
-        {users.map((user, index) => (
-          <li key={index} className="flex items-center justify-between py-2 px-4 border-b border-gray-300">
-            <div>
-              <input type="checkbox" className="mr-2" />
-              {user.name} - {user.email}
-            </div>
-            <div>
-              <button onClick={() => handleDeleteUser(index)} className="mr-2">Delete
-              </button>
-              <button onClick={() => console.log('Modify user:', user)}>Update
-              </button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+								<span
+									className={`${!open && "hidden"} origin-left duration-200`}
+								>
+									{Menu.title}
+								</span>
+							</Link>
+						</li>
+					))}
+				</ul>
+			</div>
+			<div className="h-screen flex-1 p-7">
+				<Outlet />
+			</div>
+		</div>
+	);
 };
-
-export default UsersPage;
+export default HomePage;

@@ -6,24 +6,23 @@ import privateRoutes from "./privateRoutes";
 import publicRoutes from "./publicRoutes";
 
 export const getRoutesByUserRole = (role) => {
-  if (role === "admin") {
-    return [...adminRoutes, ...privateRoutes];
-  } else if (role === "developer") {
-    return privateRoutes;
-  }
+	if (role === "admin") {
+		return [...adminRoutes, ...privateRoutes];
+	} else if (role === "developer") {
+		return privateRoutes;
+	}
 };
 
 export default function Router() {
-  const {
-    computed: { isAuthenticated },
-    state: { user },
-  } = useStore();
-
-  return (
-    <RouterProvider
-      router={createBrowserRouter(
-        isAuthenticated ? getRoutesByUserRole(user.role) : publicRoutes
-      )}
-    />
-  );
+	const {
+		computed: { isAuthenticated },
+		state: { user },
+	} = useStore();
+	return (
+		<RouterProvider
+			router={createBrowserRouter(
+				isAuthenticated ? getRoutesByUserRole(user.role) : publicRoutes
+			)}
+		/>
+	);
 }
